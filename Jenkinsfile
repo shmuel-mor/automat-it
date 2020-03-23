@@ -84,7 +84,7 @@ pipeline {
             steps {
                 sh 'git clone https://github.com/shmuel-mor/automat-it.git'
                 sh 'cp web/target/*.war automat-it/'
-                sh 'cd automat-it; docker build -t time-tracker .'
+                sh 'cd automat-it; sudo docker build -t time-tracker .'
             }
         }
     }

@@ -80,11 +80,18 @@ pipeline {
                 }
             }
         }
-        stage('Build images') {
+        stage('Build Docker Image') {
             steps {
                 sh 'git clone https://github.com/shmuel-mor/automat-it.git'
                 sh 'cp web/target/*.war automat-it/'
                 sh 'cd automat-it; docker build -t time-tracker .'
+                sh 'docker tag time-tracker localhost:8083/repository/docker-repo/time-tracker'
+            }
+        }
+        stage('Push Image to Nexus') {
+            steps {
+                sh 'docker login -u admin -p admin http://localhost:8083/repository/docker-private/'
+                sh 'docker push localhost:8083/repository/docker-repo/time-tracker'
             }
         }
     }

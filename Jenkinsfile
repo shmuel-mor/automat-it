@@ -83,7 +83,7 @@ pipeline {
         stage('Build images') {
             steps {
                 sh 'git clone https://github.com/shmuel-mor/automat-it.git'
-                sh 'cp web/target *.war automat-it/'
+                sh 'cp web/target/*.war automat-it/'
                 sh 'cd automat-it; docker build -t time-tracker .'
             }
         }
